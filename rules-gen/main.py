@@ -12,7 +12,7 @@ import gen_app
 def connect_db():
 
 	client = pymongo.MongoClient("mongodb://admin:Thespiandelights862@10.55.88.211/admin")
-	db = client['hre-import-1']
+	db = client['import-1']
 
 	collection = db['firewall-rules-in']
 
