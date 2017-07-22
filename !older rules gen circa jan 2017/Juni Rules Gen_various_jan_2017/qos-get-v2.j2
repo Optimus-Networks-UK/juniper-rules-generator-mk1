@@ -1,0 +1,60 @@
+!
+
+ ip access-list extended acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}} 
+   permit {{ protocol }} host {{ dst_ip }} range {{ start_port }} {{ end_port }} any
+   permit {{ protocol }} host {{ dst_ip }} range {{ start_port }} {{ end_port }} any
+   permit {{ protocol }} any host {{ dst_ip }} range {{ start_port }} {{ end_port }} 
+   permit {{ protocol }} any host {{ dst_ip }} range {{ start_port }} {{ end_port }}
+
+!
+
+  class-map match-any acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}} 
+    description match {{ protocol }} {{ datatype }}
+
+ !
+
+ policy-map m87-qos-policy-in
+   class acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}}
+      set dscp {{ set_dscp }}
+
+ !
+
+
+ ip access-list extended acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}} 
+   permit {{ protocol }} host {{ dst_ip }} range {{ start_port }} {{ end_port }} any
+   permit {{ protocol }} host {{ dst_ip }} range {{ start_port }} {{ end_port }} any
+   permit {{ protocol }} any host {{ dst_ip }} range {{ start_port }} {{ end_port }} 
+   permit {{ protocol }} any host {{ dst_ip }} range {{ start_port }} {{ end_port }}
+
+!
+
+  class-map match-any acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}} 
+    description match {{ protocol }} {{ datatype }}
+
+ !
+
+ policy-map m87-qos-policy-in
+   class acl-{{ aclname }}-{{ apptype }}-{{ datatype }}-{{ endpoint}}
+      set dscp {{ set_dscp }}
+
+ !
+
+### Remember to turn the srczone etc into a single object and reference them
+
+{% for srcZone, dstZone, policyName in zoneContext %}
+ 	{% for srcAddress in srcAddresses%}
+  		set security policies from-zone {{srcZone}} to-zone {{dstZone}} policy {{policyName}} match source-address {{srcAddress}} }
+
+ {% for srcZone, dstZone, policyName in zoneContext %}
+ 	{% for dstAddress in dstAddresses%}
+  		set security policies from-zone {{srcZone}} to-zone {{dstZone}} policy {{policyName}} match source-address {{dstAddress}} }
+
+ {% for srcZone, dstZone, policyName in zoneContext %}
+ 	{% for application in applications%}
+  		set security policies from-zone {{srcZone}} to-zone {{dstZone}} policy {{policyName}} match source-address {{dstAddress}} }
+
+ {% for srcZone, dstZone, policyName in zoneContext %}
+  	set security policies from-zone {{srcZone}} to-zone {{dstZone}} policy {{policyName}} then permit }
+ {% for srcZone, dstZone, policyName in zoneContext %}
+  	set security policies from-zone {{srcZone}} to-zone {{dstZone}} policy {{policyName}} then log session-init }
+

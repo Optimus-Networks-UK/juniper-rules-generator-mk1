@@ -1,0 +1,77 @@
+[
+  {
+    "aclname": "jinjaqos",
+    "apptype": "voice",
+    "datatype": "rtp",
+    "endpoint": "freepbx",
+    "protocol": "udp",
+    "dst_ip": "10.10.190.5",
+    "start_port": "10000",
+    "end_port": "20000",
+    "set_dscp": "ef",
+    "vlans": [
+      {
+        "name": "Data",
+        "id": 100
+      },
+      {
+        "name": "Voice",
+        "id": 200
+      },
+      {
+        "name": "Server",
+        "id": 300
+      }
+    ]
+  },
+  {
+    "aclname": "jinjaqos",
+    "apptype": "voice",
+    "datatype": "siptls",
+    "endpoint": "freepbx",
+    "protocol": "tcp",
+    "dst_ip": "10.10.190.5",
+    "start_port": "5061",
+    "end_port": "5061",
+    "set_dscp": "af31",
+    "vlans": [
+      {
+        "name": "Data",
+        "id": 100
+      },
+      {
+        "name": "Voice",
+        "id": 200
+      },
+      {
+        "name": "Server",
+        "id": 300
+      }
+    ]
+  },
+  {
+    "aclname": "jinjaqos",
+    "apptype": "voice",
+    "datatype": "sipudp",
+    "endpoint": "freepbx",
+    "protocol": "udp",
+    "dst_ip": "10.10.190.5",
+    "start_port": "5060",
+    "end_port": "5060",
+    "set_dscp": "af31",
+    "vlans": [
+      {
+        "name": "Data",
+        "id": 100
+      },
+      {
+        "name": "Voice",
+        "id": 200
+      },
+      {
+        "name": "Server",
+        "id": 300
+      }
+    ]
+  }
+]

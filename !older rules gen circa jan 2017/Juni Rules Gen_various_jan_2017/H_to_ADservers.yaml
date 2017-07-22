@@ -1,0 +1,26 @@
+---
+name: pre-sso-to-ad
+requestor: Bigcompany
+email: 
+company: Bigcompany
+description: Pre SSO to AD Servers
+lanDeskNumber: 
+changeId:  RFC0077777
+zones:
+  srcZone: 
+    swi-interconnect:
+     - srv-sw.local 172.31.49.100
+
+  dstZone: 
+    svr-mgt:
+      - 172.31.48.7
+app: 
+  dstPortTcp:
+    - 636
+  dstPortUdp: 
+action:
+  permit: True
+  log: True
+options:
+  OS: Juniper
+  fwName: production-firewall
